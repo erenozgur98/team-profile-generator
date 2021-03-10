@@ -64,11 +64,17 @@ const managerQuestions = () => {
                 type:'input',
                 message:"What is Manager's office phone number?",
                 name:'offiiceNumber'
+            },
+            {
+                type: 'list',
+                message:"Would you like to add another Employee?",
+                name: 'newEmployee',
+                choices: ['Yes', 'No']
             }
         ])
-        .then((response => {
+        .then((response) => {
             console.log(response);
-        }))
+        })
 }
 
 const engineerQuestions = () => {
@@ -93,11 +99,17 @@ const engineerQuestions = () => {
                 type:'input',
                 message:"What is Engineer's GitHub username?",
                 name:'gitHub'
+            },
+            {
+                type: 'list',
+                message:"Would you like to add another Employee?",
+                name: 'newEmployee',
+                choices: ['Yes', 'No']
             }
         ])
-        .then((response => {
+        .then((response) => {
             console.log(response);
-        }))
+        })
 }
 
 const internQuestions = () => {
@@ -122,19 +134,20 @@ const internQuestions = () => {
                 type:'input',
                 message:"Which school did Intern attend to?",
                 name:'school'
+            },
+            {
+                type: 'list',
+                message:"Would you like to add another Employee?",
+                name: 'newEmployee',
+                choices: ['Yes', 'No']
             }
         ])
-        .then((response => {
+        .then((response) => {
             console.log(response);
-        }))
+        })
 }
 
 start();
-
-
-
-
-
 
 
 
