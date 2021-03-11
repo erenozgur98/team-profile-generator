@@ -57,8 +57,7 @@ const manager = () => {
             if(response.newEmployee === 'Yes'){
                 start()
             } else {
-                let newFile = render(employee);
-                fs.writeFile(outputPath, newFile, (err) => {
+                fs.writeFile(outputPath, render(employee), (err) => {
                     if(err) throw err;
                     console.log('Your HTML has been created!');
                 });
@@ -129,8 +128,7 @@ const engineerQuestions = () => {
             if(response.newEmployee === 'Yes'){
                 start()
             } else {
-                let newFile = render(employee);
-                fs.writeFile(outputPath, newFile, (err) => {
+                fs.writeFile(outputPath, render(employee), (err) => {
                     if(err) throw err;
                     console.log('Your HTML has been created!');
                 });
@@ -178,12 +176,10 @@ const internQuestions = () => {
             if(response.newEmployee === 'Yes'){
                 start()
             } else {
-                let newFile = render(employee);
-                fs.writeFile(outputPath, newFile, (err) => {
+                fs.writeFile(outputPath, render(employee), (err) => {
                     if(err) throw err;
                     console.log('Your HTML has been created!');
                 });
-                console.log(newFile);
                 return;
             }
         })
