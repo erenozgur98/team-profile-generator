@@ -11,40 +11,15 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
-
+let employee = [];
 
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-
-const start = () => {
-inquirer
-    .prompt([
-        {
-            type: 'list',
-            message: "What is the Employee's role?",
-            name: 'role',
-            choices: ['Manager', 'Engineer', 'Intern']
-        }
-    ])
-    .then((response => {
-        if(response.role === 'Manager') {
-            managerQuestions();
-        } else if (response.role === 'Engineer') {
-            engineerQuestions();
-        } else if (response.role === 'Intern') {
-            internQuestions();
-        } else {
-            return;
-        }
-    }))
-}
-
-const managerQuestions = () => {
-    inquirer
-        .prompt([            
+const manager = () => {
+    inquirer    
+        .prompt([
             {
                 type:'input',
                 message:"What is the Manager's name?",
@@ -63,26 +38,62 @@ const managerQuestions = () => {
             {
                 type:'input',
                 message:"What is Manager's office phone number?",
-                name:'offiiceNumber'
+                name:'officeNumber'
             },
             {
                 type: 'list',
-                message:"Would you like to add another Employee?",
+                message:"Would you like to add new Employee?",
                 name: 'newEmployee',
                 choices: ['Yes', 'No']
             }
         ])
-        .then((response) => {
-            console.log(response);
-        })
+        .then((response => {
+            const manager = new Manager(response.name, response.id, response.email, response.officeNumber)
+            employee.push(manager);
+
+            console.log(employee);
+            if(response.newEmployee === 'Yes'){
+                start()
+            } else {
+                let newFile = render(employee);
+                fs.writeFile(outputPath, newFile, (err) => {
+                    if(err) throw err;
+                    console.log('Your HTML has been created!');
+                });
+                return;
+            }
+        }));
 }
+
+
+const start = () => {
+inquirer
+    .prompt([
+        {
+            type: 'list',
+            message: "What is the new Employee's role?",
+            name: 'role',
+            choices: ['Engineer', 'Intern']
+        }
+    ])
+    .then((response => {
+        if (response.role === 'Engineer') {
+            engineerQuestions();
+        } else if (response.role === 'Intern') {
+            internQuestions();
+        } else {
+            return;
+        }
+    }))
+}
+
 
 const engineerQuestions = () => {
     inquirer
         .prompt([            
             {
                 type:'input',
-                message:"What is the Engineer's name?",
+                message:"What is new the Engineer's name?",
                 name: 'name'
             },
             {
@@ -108,7 +119,21 @@ const engineerQuestions = () => {
             }
         ])
         .then((response) => {
-            console.log(response);
+            const engineer = new Engineer(response.name, response.id, response.email, response.gitHub);
+
+            employee.push(engineer);
+            console.log(employee);
+
+            if(response.newEmployee === 'Yes'){
+                start()
+            } else {
+                let newFile = render(employee);
+                fs.writeFile(outputPath, newFile, (err) => {
+                    if(err) throw err;
+                    console.log('Your HTML has been created!');
+                });
+                return;
+            }
         })
 }
 
@@ -117,7 +142,7 @@ const internQuestions = () => {
         .prompt([            
             {
                 type:'input',
-                message:"What is the Intern's name?",
+                message:"What is the new Intern's name?",
                 name: 'name'
             },
             {
@@ -143,11 +168,26 @@ const internQuestions = () => {
             }
         ])
         .then((response) => {
-            console.log(response);
+            const intern = new Intern(response.name, response.id, response.email, response.school);
+
+            employee.push(intern);
+            console.log(employee);
+
+            if(response.newEmployee === 'Yes'){
+                start()
+            } else {
+                let newFile = render(employee);
+                fs.writeFile(outputPath, newFile, (err) => {
+                    if(err) throw err;
+                    console.log('Your HTML has been created!');
+                });
+                console.log(newFile);
+                return;
+            }
         })
 }
 
-start();
+manager();
 
 
 

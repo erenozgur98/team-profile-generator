@@ -8,50 +8,54 @@ test("Can instantiate Employee instance", () => {
 });
 
 test("Can set name via constructor arguments", () => {
-    const newName = 'name';
-    const emp = new Employee(newName);
+    const name = 'name';
+    const emp = new Employee(name);
 
-    expect(emp instanceof Employee).toBe(true);
+    expect(emp instanceof Employee).toEqual(true);
 });
 
 test("Can set id via constructor argument", () => {
     const id = 1;
     const emp = new Employee(id);
 
-    expect(emp instanceof Employee).toBe(true);
+    expect(emp instanceof Employee).toEqual(true);
 });
 
 test("Can set email via constructor argument", () => {
-    const newEmail = 'email';
-    const emp = new Employee(newEmail);
+    const email = 'email@email.com';
+    const emp = new Employee(email);
 
-    expect(emp instanceof Employee).toBe(true);
+    expect(emp instanceof Employee).toEqual(true);
 });
 
 test("Can get name via getName()", () => {
-    const newName = 'name';
-    const emp = new Employee(newName);
+    const name = 'name';
+    const emp = new Employee(name);
+    const newName = emp.getName();
 
-    expect(emp instanceof Employee).toBe(true);
+    expect(newName).toEqual(name);
 });
 
 test("Can get id via getId()", () => {
     const id = 1;
-    const emp = new Employee(id);
+    const emp = new Employee('test', 1, id);
+    const newId = emp.getId();
 
-    expect(emp instanceof Employee).toBe(true);
+    expect(newId).toEqual(id);
 });
 
 test("Can get email via getEmail()", () => {
-    const email = 'email';
-    const emp = new Employee(email);
+    const email = 'email@email.com';
+    const emp = new Employee('test', 1, email);
+    const newEmail = emp.getEmail();
 
-    expect(emp instanceof Employee).toBe(true);
+    expect(newEmail).toEqual(email);
 });
 
 test("getRole() should return \"Employee\"", () => {
-    const getRole = 'Employee';
-    const emp = new Employee(getRole);
+    const role = 'Employee';
+    const emp = new Employee('Employee', 1, 'email@email.com', role);
+    const getRole = emp.getRole();
 
-    expect(emp instanceof Employee).toBe(true);
+    expect(getRole).toEqual(role);
 });
