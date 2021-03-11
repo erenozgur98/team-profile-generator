@@ -49,7 +49,9 @@ const manager = () => {
         ])
         .then((response => {
             const manager = new Manager(response.name, response.id, response.email, response.officeNumber)
+
             employee.push(manager);
+            console.log(employee);
 
             console.log(employee);
             if(response.newEmployee === 'Yes'){
